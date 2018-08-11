@@ -50,7 +50,7 @@ public boolean validarTexto(String text){
 public boolean validarPass (String pass) {
     boolean validacion = false;
     try {      
-        if (pass.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&]{8,15}[^'\\s]")) {
+        if (pass.matches("[a-z]{6,}[1-9]{1,}")) {
             validacion = true;
         }
     }catch (java.lang.NumberFormatException e){       

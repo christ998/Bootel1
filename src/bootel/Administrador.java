@@ -11,11 +11,9 @@ package bootel;
  */
 public class Administrador extends Persona{
     public int codIdentificador;
-    public Administrador(String nombre, String rut,int codIdentificador) {
-        super(nombre, rut);
+    public Administrador(String nombre, String rut,String pass,int codIdentificador) {
+        super(nombre, rut, pass);
         this.codIdentificador=codIdentificador;
-        this.nombre=nombre;
-        this.rut=rut;
     }
 
     public int getCodIdentificador() {
