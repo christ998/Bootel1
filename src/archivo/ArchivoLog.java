@@ -31,7 +31,7 @@ public class ArchivoLog {
                     String estudiante [] = linea.split(";");
                     if (estudiante[0].equals(nombre) && estudiante[1].equals(pass)) {
                         
-                        Cliente c = new Cliente(estudiante[0],estudiante[1],estudiante[2],estudiante[3]);
+                        Cliente c = new Cliente(estudiante[0],estudiante[2],estudiante[1],estudiante[3]);
                         
                         System.out.println("Estimado :"+c.getNombre());                                                      
                         System.out.println("Ha iniciado session exitosamente");
@@ -58,7 +58,7 @@ public class ArchivoLog {
                     String[] admin = linea.split(";");
                     if (admin[0].equals(nombre) && admin[2].equals(pass) && admin[3].equals(cod)) {
                         
-                        Cliente c = new Cliente(admin[0],admin[1],admin[2],admin[3]);
+                        Cliente c = new Cliente(admin[0],admin[2],admin[1],admin[3]);
                         return true;
                     }
                 }

@@ -56,7 +56,7 @@ public class ArchivoDepto {
                     String estudiante [] = linea.split(";");
                     if (estudiante[0].equals(nombreEstudiante) && estudiante[1].equals(rutEstudiante)) {
                         bandera = true;
-                        Cliente c = new Cliente(estudiante[0],estudiante[1],estudiante[2],estudiante[3]);
+                        Cliente c = new Cliente(estudiante[0],estudiante[2],estudiante[1],estudiante[3]);
                         
                         System.out.println("Estimado :"+c.getNombre());                                                      
                         System.out.println("Su Reserva ha sido realizada con exito!");
