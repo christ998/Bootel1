@@ -8,6 +8,8 @@ package archivo;
 import bootel.Cliente;
 import bootel.Departamento;
 import bootel.Reserva;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -58,10 +60,12 @@ public class ArchivoDepto {
                     if (estudiante[0].equals(reserva.nombreEstudiante) && estudiante[2].equals(reserva.rutEstudiante)) {
                         bandera = true;
                         Cliente c = new Cliente(estudiante[0], estudiante[2], estudiante[1], estudiante[3]);
+                                                    
                         JOptionPane.showMessageDialog(null, "Reserva hecha sin problemas");
+                        
                         System.out.println("Estimado :" + c.getNombre());
                         System.out.println("Su Reserva ha sido realizada con exito!");
-
+                        System.exit(0);
                     }
                 }
                 if (bandera == false) {
