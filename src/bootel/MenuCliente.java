@@ -97,7 +97,7 @@ public class MenuCliente {
                         
                         Reserva reserva = new Reserva(nombreEstudiante,rutEstudiante,String.valueOf(nDepto),String.valueOf(precio));  
                         
-                        muestra.reservarDepto(reserva,rutEstudiante,nombreEstudiante);
+                        muestra.reservarDepto(reserva);
                         
                         
                         break;

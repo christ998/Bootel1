@@ -6,6 +6,7 @@
 package gui;
 
 import archivo.ArchivoDepto;
+import bootel.Reserva;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,13 +23,13 @@ import javax.swing.JTextField;
  */
 public class VentanaReserva extends JFrame implements ActionListener {
 
-    VentanaSegura vs;
-    ArchivoDepto ad;
+    
 
     private JLabel lbl1, lbl2, lbl3, lbl4;
-    public JTextField num1, num2, num3, num4;
+    public JTextField cuadroNombre, cuadroRut, numero, precio;
     private JButton btnaceptar;
     private JComboBox operacion;
+    ArchivoDepto depto ;
 
     public VentanaReserva() {
 
@@ -52,23 +53,23 @@ public class VentanaReserva extends JFrame implements ActionListener {
         lbl4.setBounds(50, 350, 110, 20);
         this.add(lbl4);
 
-        num1 = new JTextField();
-        num1.setBounds(200, 50, 100, 20);
-        this.add(num1);
+        cuadroNombre = new JTextField();
+        cuadroNombre.setBounds(200, 50, 100, 20);
+        this.add(cuadroNombre);
 
-        num2 = new JTextField();
-        num2.setBounds(200, 150, 100, 20);
-        this.add(num2);
+        cuadroRut = new JTextField();
+        cuadroRut.setBounds(200, 150, 100, 20);
+        this.add(cuadroRut);
 
-        num3 = new JTextField();
-        num3.setBounds(200, 250, 100, 20);
-        num3.setEditable(false);
-        this.add(num3);
+        numero = new JTextField();
+        numero.setBounds(200, 250, 100, 20);
+        numero.setEditable(true);
+        this.add(numero);
 
-        num4 = new JTextField();
-        num4.setBounds(200, 350, 100, 20);
-        num4.setEditable(false);
-        this.add(num4);
+        precio = new JTextField();
+        precio.setBounds(200, 350, 100, 20);
+        precio.setEditable(true);
+        this.add(precio);
 
         /*
         operacion = new JComboBox();
@@ -86,29 +87,23 @@ public class VentanaReserva extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        vs = new VentanaSegura();
-        ad = new ArchivoDepto();
+
+        depto = new ArchivoDepto();
 
         if (btnaceptar == ae.getSource()) {
-            System.out.println(num1.getText() + " - " + num2.getText());
+            System.out.println(cuadroNombre.getText() + " - " + cuadroRut.getText());
 
-            if (num1.getText().isEmpty() && num2.getText().isEmpty()) {
+            if (cuadroNombre.getText().isEmpty() && cuadroRut.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Por favor, asegurece de ingresar datos en los campos que se le pide");
 
-            } else if (num1.getText().isEmpty() || num2.getText().isEmpty()) {
+            } else if (cuadroNombre.getText().isEmpty() || cuadroRut.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Asegurece de que en ambos campos tengan datos ");
 
             } else {
+                Reserva r = new Reserva(cuadroNombre.getText(), cuadroRut.getText(), numero.getText(), precio.getText());
+                depto.reservarDepto(r);
+                
 
-                JOptionPane.showMessageDialog(this, "Por favor, vuelva a ingresar sus datos para así realizar una reserva segura");
-
-                vs.setDefaultCloseOperation(3);
-                vs.setSize(320, 300);
-                vs.setLocationRelativeTo(null);
-                vs.setResizable(false);
-                vs.setTitle("Seguridad");
-                vs.setVisible(true);
-                dispose();
             }
 
         }
