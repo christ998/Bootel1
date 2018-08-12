@@ -29,8 +29,8 @@ import javax.swing.border.EmptyBorder;
 
 public class JLogin extends JDialog implements ActionListener{
     private final JPanel contentPanel;
-    private JTextField textField;
-    private JPasswordField textField_1;
+    private JTextField usuarioIngresado;
+    private JPasswordField contrasegnaIngresada;
     private JButton btnIngresar;
     private VentanaInicio ventanaPrincipal;
     private ImageIcon img;
@@ -62,18 +62,18 @@ public class JLogin extends JDialog implements ActionListener{
             contentPanel.add(lblNewLabel);
         }
         {
-            textField = new JTextField();
-            contentPanel.add(textField);
-            textField.setColumns(10);
+            usuarioIngresado = new JTextField();
+            contentPanel.add(usuarioIngresado);
+            usuarioIngresado.setColumns(10);
         }
         {
             JLabel lblNewLabel_1 = new JLabel("Password");
             contentPanel.add(lblNewLabel_1);
         }
         {
-            textField_1 = new JPasswordField();          
-            contentPanel.add(textField_1);
-            textField_1.setColumns(10);
+            contrasegnaIngresada = new JPasswordField();          
+            contentPanel.add(contrasegnaIngresada);
+            contrasegnaIngresada.setColumns(10);
         }
         {
             JLabel lblNewLabel_2 = new JLabel("");
@@ -92,7 +92,7 @@ public class JLogin extends JDialog implements ActionListener{
         InterfaceMenuCliente menu = new InterfaceMenuCliente();
         InterfaceMenu im = new InterfaceMenu();
         if (ae.getSource() == btnIngresar ){
-            Login login = new Login(textField.getText(),String.copyValueOf(textField_1.getPassword()));
+            Login login = new Login(usuarioIngresado.getText(),String.copyValueOf(contrasegnaIngresada.getPassword()));
             
             if(login.usuarioClienteExiste()) { // Este se ejecutara si un cliente ingresa a la app
                 
@@ -107,20 +107,20 @@ public class JLogin extends JDialog implements ActionListener{
                 dispose();   
                 
                                           
-            }else if (textField.getText().isEmpty() && textField_1.getText().isEmpty()) {  
+            }else if (usuarioIngresado.getText().isEmpty() && contrasegnaIngresada.getText().isEmpty()) {  
                 JOptionPane.showMessageDialog(this, "Los campos de texto estan vacio, asegurece de ingresar un nombre y una contraseña");
-                this.textField.setText("");
-                this.textField_1.setText("");
+                this.usuarioIngresado.setText("");
+                this.contrasegnaIngresada.setText("");
                               
-                    }else if ((textField.getText().isEmpty() || textField_1.getText().isEmpty())){
+                    }else if ((usuarioIngresado.getText().isEmpty() || contrasegnaIngresada.getText().isEmpty())){
                     JOptionPane.showMessageDialog(this, "Debe ingresar datos en ambos campos");
-                    this.textField.setText("");
-                    this.textField_1.setText("");
+                    this.usuarioIngresado.setText("");
+                    this.contrasegnaIngresada.setText("");
                     
                     } else {
                        JOptionPane.showMessageDialog(this, "El usuario no existe");
-                        this.textField.setText("");
-                        this.textField_1.setText(""); 
+                        this.usuarioIngresado.setText("");
+                        this.contrasegnaIngresada.setText(""); 
                 }          
             }    
         } 
