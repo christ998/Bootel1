@@ -65,7 +65,7 @@ public class ArchivoDepto {
                         
                         System.out.println("Estimado :" + c.getNombre());
                         System.out.println("Su Reserva ha sido realizada con exito!");
-                        System.exit(0);
+                        
                     }
                 }
                 if (bandera == false) {
@@ -90,21 +90,23 @@ public class ArchivoDepto {
                     bw = new BufferedWriter(fw);
                     bw.newLine();
                     bw.write(reserva.nombreEstudiante + ";" + reserva.rutEstudiante + ";" + reserva.numeroDepto + ";" + reserva.precio);
-
+                   
                 } else {
                     fw = new FileWriter(f);
                     bw = new BufferedWriter(fw);
                     bw.write(reserva.nombreEstudiante + ";" + reserva.rutEstudiante + ";" + reserva.numeroDepto + ";" + reserva.precio);
-
+                    
                 }
 
                 bw.close();
                 fw.close();
+                System.exit(0);
             } catch (Exception e) {
                 System.out.println("ERROR");
             }
         } else {
             System.out.println("");
+            System.exit(0);
         }
     }
 }
