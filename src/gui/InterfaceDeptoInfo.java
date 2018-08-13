@@ -81,7 +81,18 @@ public class InterfaceDeptoInfo extends JFrame {
         if (nro == 2) {
             imagen1.setIcon(new ImageIcon("z_Imagenes/depto2/img1.jpg"));
         }
+        
         contentPane.add(imagen1);
+        
+        JLabel imagen4 = new JLabel("");
+        imagen4.setBounds(558, 185, 250, 162);
+        if (nro == 1) {
+            imagen4.setIcon(new ImageIcon("z_Imagenes/depto1/img4.png"));
+        }
+        if (nro == 2) {
+            imagen4.setIcon(new ImageIcon("z_Imagenes/depto2/img4.jpg"));
+        }
+        contentPane.add(imagen4);
 
         infoDepto = new JTextArea();
         infoDepto.setEditable(false);
@@ -97,6 +108,10 @@ public class InterfaceDeptoInfo extends JFrame {
         agregados.setColumns(10);
         agregado = "Wifi";
         agregados.setText(agregado);
+        
+        JButton btnAtras = new JButton("Atras");
+        btnAtras.setBounds(548, 663, 97, 25);
+        contentPane.add(btnAtras);
 
         JLabel lblWifi = new JLabel("");
         lblWifi.setBounds(116, 611, 22, 20);
@@ -106,6 +121,8 @@ public class InterfaceDeptoInfo extends JFrame {
         JButton btnReservar = new JButton("Reservar");
         btnReservar.setBounds(771, 663, 97, 25);
         contentPane.add(btnReservar);
+        
+        
         ActionListener reservar = new ActionListener() {
 
             @Override
@@ -122,7 +139,21 @@ public class InterfaceDeptoInfo extends JFrame {
             }
         };
         btnReservar.addActionListener(reservar);
-
+        
+        ActionListener retroceder = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+             InterfaceMenu back = new InterfaceMenu();             
+             back.setDefaultCloseOperation(3);
+             back.setSize(720,480); // 1024 , 720 clienteMenu
+             back.setLocationRelativeTo(null);
+             back.setResizable(false);
+             back.setTitle(" Menu  BooTel ");   
+             back.setVisible(true);
+             dispose();   
+            }
+        };
+        btnAtras.addActionListener(retroceder);
     }
 
 }
