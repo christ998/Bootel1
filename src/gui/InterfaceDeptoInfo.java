@@ -143,12 +143,7 @@ public class InterfaceDeptoInfo extends JFrame {
         ActionListener retroceder = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-             InterfaceMenu back = new InterfaceMenu();             
-             back.setDefaultCloseOperation(3);
-             back.setSize(720,480); // 1024 , 720 clienteMenu
-             back.setLocationRelativeTo(null);
-             back.setResizable(false);
-             back.setTitle(" Menu  BooTel ");   
+             InterfaceMenu back = new InterfaceMenu();              
              back.setVisible(true);
              dispose();   
             }

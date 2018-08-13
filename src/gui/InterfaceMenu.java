@@ -36,7 +36,12 @@ public class InterfaceMenu extends JFrame implements ActionListener {
     private int nro;
 
     public InterfaceMenu() {
-
+        setDefaultCloseOperation(3);
+        setSize(720,480); // 1024 , 720 clienteMenu
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setTitle(" Menu  BooTel ");  
+             
         setLayout(null);
         img1 = new ImageIcon("z_imagenes/depto1/depa1.png");
         lblimg1 = new JLabel(img1);
