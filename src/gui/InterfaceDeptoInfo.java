@@ -54,7 +54,7 @@ public class InterfaceDeptoInfo extends JFrame {
         contentPane.add(lblDepartamento);
 
         JLabel imagen3 = new JLabel("");
-        imagen3.setBounds(257, 53, 222, 159);
+        imagen3.setBounds(267, 13, 222, 159);
         if (nro == 1) {
             imagen3.setIcon(new ImageIcon("z_Imagenes/depto1/img1.png"));
         }
@@ -64,7 +64,7 @@ public class InterfaceDeptoInfo extends JFrame {
         contentPane.add(imagen3);
 
         JLabel imagen2 = new JLabel("");
-        imagen2.setBounds(549, 65, 260, 159);
+        imagen2.setBounds(548, 13, 260, 159);
         if (nro == 1) {
             imagen2.setIcon(new ImageIcon("z_Imagenes/depto1/img2.png"));
         }
@@ -74,12 +74,12 @@ public class InterfaceDeptoInfo extends JFrame {
         contentPane.add(imagen2);
 
         JLabel imagen1 = new JLabel("");
-        imagen1.setBounds(267, 209, 222, 162);
+        imagen1.setBounds(267, 185, 222, 162);
         if (nro == 1) {
-            imagen3.setIcon(new ImageIcon("z_Imagenes/depto1/img3.png"));
+            imagen1.setIcon(new ImageIcon("z_Imagenes/depto1/img3.png"));
         }
         if (nro == 2) {
-            imagen3.setIcon(new ImageIcon("z_Imagenes/depto2/img1.jpg"));
+            imagen1.setIcon(new ImageIcon("z_Imagenes/depto2/img1.jpg"));
         }
         contentPane.add(imagen1);
 
