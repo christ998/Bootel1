@@ -87,6 +87,7 @@ public class InterfaceBorrarUsuario extends JFrame {
             lector = new BufferedReader(fr);
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
+            System.exit(0);
         }
         String usuario, rut, lee;
         String datos[] = new String[4];
@@ -104,33 +105,29 @@ public class InterfaceBorrarUsuario extends JFrame {
 
     public void removeUser(String run) {
         boolean rut = false;
+        byte linea;
         try {
             registro = new File("Registro.txt");
             fr = new FileReader(registro);
             lector = new BufferedReader(fr);
-            
+
             fw = new FileWriter(registro);
             writer = new PrintWriter(fw);
-            
-        } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        } catch (IOException ex) {
-            Logger.getLogger(InterfaceBorrarUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String lee;
-        while (rut == false) {
-            try {
+            String lee;
+            while (rut == false) {
+
                 lee = lector.readLine();
                 if (lee.contains(run)) {
                     rut = true;
-                    writer.println(run);
                     writer.flush();
-                    lector.close();
-                    writer.close();
                 }
-            } catch (IOException ex) {
-                Logger.getLogger(InterfaceBorrarUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
+            lector.close();
+            writer.close();
+        } catch (IOException ex) {
+            Logger.getLogger(InterfaceBorrarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }catch (NullPointerException e){
+            System.out.println(e.getMessage());
         }
 
     }
