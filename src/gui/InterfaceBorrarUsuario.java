@@ -104,8 +104,6 @@ public class InterfaceBorrarUsuario extends JFrame {
     }
 
     public void removeUser(String run) {
-        boolean rut = false;
-        byte linea;
         try {
             registro = new File("Registro.txt");
             fr = new FileReader(registro);
@@ -114,11 +112,9 @@ public class InterfaceBorrarUsuario extends JFrame {
             fw = new FileWriter(registro);
             writer = new PrintWriter(fw);
             String lee;
-            while (rut == false) {
-
-                lee = lector.readLine();
-                if (lee.contains(run)) {
-                    rut = true;
+            while ((lee = lector.readLine()) != null) {
+                if (!lee.contains(run)) {
+                    writer.println(lee);
                     writer.flush();
                 }
             }
@@ -126,8 +122,6 @@ public class InterfaceBorrarUsuario extends JFrame {
             writer.close();
         } catch (IOException ex) {
             Logger.getLogger(InterfaceBorrarUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }catch (NullPointerException e){
-            System.out.println(e.getMessage());
         }
 
     }
