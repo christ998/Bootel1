@@ -42,7 +42,7 @@ public class InterfaceDeptoInfo extends JFrame {
     public void initComponents(String descripcion, int nro) {
 
         try {
-            fr = new FileReader("infoDeptos.txt");
+            fr = new FileReader("InfoDepto.txt");
             lector = new BufferedReader(fr);
         } catch (FileNotFoundException e1) {
             System.out.println(e1.getMessage());
@@ -74,7 +74,7 @@ public class InterfaceDeptoInfo extends JFrame {
         contentPane.add(imagen2);
 
         JLabel imagen1 = new JLabel("");
-        imagen1.setBounds(257, 209, 188, 122);
+        imagen1.setBounds(267, 209, 222, 162);
         if (nro == 1) {
             imagen3.setIcon(new ImageIcon("z_Imagenes/depto1/img3.png"));
         }
@@ -85,7 +85,7 @@ public class InterfaceDeptoInfo extends JFrame {
 
         infoDepto = new JTextArea();
         infoDepto.setEditable(false);
-        infoDepto.setBounds(139, 384, 754, 176);
+        infoDepto.setBounds(139, 384, 814, 176);
         contentPane.add(infoDepto);
         infoDepto.setColumns(10);
         infoDepto.setText(descripcion);
@@ -99,7 +99,7 @@ public class InterfaceDeptoInfo extends JFrame {
         agregados.setText(agregado);
 
         JLabel lblWifi = new JLabel("");
-        lblWifi.setBounds(105, 618, 22, 20);
+        lblWifi.setBounds(116, 611, 22, 20);
         lblWifi.setIcon(new ImageIcon("z_imagenes/iconImage/icon_wifi.png"));
         contentPane.add(lblWifi);
 
