@@ -34,8 +34,9 @@ public class InterfaceBorrarUsuario extends JFrame {
     private DefaultTableModel modelo;
     private File registro;
     private FileWriter fw;
-    private FileWriter writer;
-    private File tempFile ;
+    private FileWriter wr;
+    private BufferedWriter writer;
+    private File tempFile;
     private JButton btnGuardar;
 
     public InterfaceBorrarUsuario() throws IOException {
@@ -61,7 +62,7 @@ public class InterfaceBorrarUsuario extends JFrame {
         modelo.addColumn("Rut");
         table.setModel(modelo);
         scrollPane.setViewportView(table);
-        
+
         btnGuardar = new JButton("Guardar");
         btnGuardar.setBounds(298, 371, 97, 25);
         contentPane.add(btnGuardar);
@@ -76,19 +77,23 @@ public class InterfaceBorrarUsuario extends JFrame {
                 int fila = table.getSelectedRow();
                 String nombre = (String) modelo.getValueAt(fila, 0);
                 modelo.removeRow(fila);
-                System.out.println(nombre);
-                removeUser(nombre);
+                try {
+                    removeUser(nombre);
+                } catch (IOException ex) {
+                    System.out.println(ex.getMessage());
+                }
             }
         };
         btnBanear.addActionListener(ban);
         ActionListener guardar = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                 
+              InterfaceMenuAdmin menu = new InterfaceMenuAdmin();
+              
             }
         };
         btnGuardar.addActionListener(guardar);
-                
+
     }
 
     public void buscaUsuarios() throws IOException {
@@ -114,34 +119,47 @@ public class InterfaceBorrarUsuario extends JFrame {
         }
     }
 
-    public void removeUser(String nombre) {
+    public void removeUser(String nombre) throws IOException {
+        String lee = null;
+        String usuario = "";
+        CharSequence aux = "";
         try {
             registro = new File("Registro.txt");
-            tempFile = new File("Reserva.txt");
-            fr       = new FileReader("Registro.txt");
-            lector   = new BufferedReader(fr);
-            writer   = new FileWriter(tempFile,true);
-            fw       = new FileWriter(registro);                               
-            String cadena;
-            
-            while ((cadena=lector.readLine()) != null) {
-                System.out.println(cadena);
-               if(!cadena.contains(nombre)){
-                   writer.write(cadena);
-               }               
-            }
-            writer.close();
+            tempFile = new File("Registro1.txt");
+            fr = new FileReader(registro);
+            lector = new BufferedReader(fr);
+            fw = new FileWriter(tempFile);
+            writer = new BufferedWriter(fw);
 
-            //Renombra el archivo nuevo
-            if (!tempFile.renameTo(registro)) {
-                System.out.println("Archivo no renombrado");
-            }      
-            }catch (IOException ex) {
+        } catch (FileNotFoundException ex) {
             System.out.println(ex.getMessage());
-            }                               
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        while ((lee = lector.readLine()) != ""){
+            lee = lector.readLine();
+            aux = lee;
+            System.out.println(aux);
+
+            if (lee.contains(aux)) {
+                continue;
+            } else {
+                usuario += "\n" + lee;
+            }
+        }  
+        writer.write(usuario);
+        writer.close();
+        if (!registro.delete()) {
+            System.out.println("Registro eliminado");
+        }
+        if (!tempFile.renameTo(registro)) {
+            System.out.println("Nombre cambiado");
+        }
+
     }
 
-   /* public String eliminaLineasBlancas() throws FileNotFoundException, IOException {
+    /* public String eliminaLineasBlancas() throws FileNotFoundException, IOException {
         registro = new File("Registro.txt");
         fr = new FileReader(registro);
         fw = new FileWriter(registro);
@@ -162,5 +180,4 @@ public class InterfaceBorrarUsuario extends JFrame {
         return texto;
 
     }*/
-    
 }

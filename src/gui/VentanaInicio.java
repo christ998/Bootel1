@@ -92,7 +92,7 @@ public class VentanaInicio extends JFrame implements ActionListener {
             if(btnLogin == ae.getSource() ){               
                 JLogin login = new JLogin(this,true);
                 login.setVisible(true); 
-                dispose();
+                
                     
             }else if (btnLoginAd == ae.getSource()) {
                 JLoginAdmin loginAd = new JLoginAdmin(this,true);

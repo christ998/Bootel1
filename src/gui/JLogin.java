@@ -95,6 +95,7 @@ public class JLogin extends JDialog implements ActionListener {
             if (login.usuarioClienteExiste()) { // Este se ejecutara si un cliente ingresa a la app
                 im.setVisible(true);
                 dispose();
+                ventanaPrincipal.dispose();
 
             } else if (usuarioIngresado.getText().isEmpty() && contrasegnaIngresada.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Los campos de texto estan vacio, asegurece de ingresar un nombre y una contraseña");

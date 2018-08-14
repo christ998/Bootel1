@@ -12,25 +12,24 @@ import javax.swing.JButton;
  * @author Vinett
  */
 public class InterfaceMenuAdmin extends javax.swing.JFrame {
-    
+
     JButton btnagregar, btneliminar, btnmod;
     private InterfaceBorrarUsuario delete;
-    
-    public InterfaceMenuAdmin() {        
-        
+
+    public InterfaceMenuAdmin() {
+        setDefaultCloseOperation(3);
+        setSize(300, 480);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setTitle("Modo Administrador");
+        setVisible(true);
+        dispose();
         setLayout(null);
-        btnagregar = new JButton("Agregar Departamento");
-        btnagregar.setBounds(50, 100, 200, 35);
-        this.add(btnagregar);
-        
-        btneliminar = new JButton("Modificar Departamento");
-        btneliminar.setBounds(50, 200, 200, 35);
-        this.add(btneliminar);
-        
+
         btnmod = new JButton("BAN");
-        btnmod.setBounds(50, 300, 200, 35);
+        btnmod.setBounds(50, 200, 200, 35);
         this.add(btnmod);
-        
+
         ActionListener ban = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -44,7 +43,7 @@ public class InterfaceMenuAdmin extends javax.swing.JFrame {
             }
         };
         btnmod.addActionListener(ban);
-        
+
     }
-    
+
 }
