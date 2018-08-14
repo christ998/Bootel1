@@ -34,7 +34,9 @@ public class InterfaceBorrarUsuario extends JFrame {
     private DefaultTableModel modelo;
     private File registro;
     private FileWriter fw;
-    private PrintWriter writer;
+    private FileWriter writer;
+    private File tempFile ;
+    private JButton btnGuardar;
 
     public InterfaceBorrarUsuario() throws IOException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,25 +61,34 @@ public class InterfaceBorrarUsuario extends JFrame {
         modelo.addColumn("Rut");
         table.setModel(modelo);
         scrollPane.setViewportView(table);
+        
+        btnGuardar = new JButton("Guardar");
+        btnGuardar.setBounds(298, 371, 97, 25);
+        contentPane.add(btnGuardar);
 
         JButton btnBanear = new JButton("Banear");
         btnBanear.setBounds(298, 154, 97, 25);
         contentPane.add(btnBanear);
-
         buscaUsuarios();
-
         ActionListener ban = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int fila = table.getSelectedRow();
-                String rut = (String) modelo.getValueAt(fila, 1);
+                String nombre = (String) modelo.getValueAt(fila, 0);
                 modelo.removeRow(fila);
-                removeUser(rut);
-
+                System.out.println(nombre);
+                removeUser(nombre);
             }
         };
         btnBanear.addActionListener(ban);
-
+        ActionListener guardar = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                 
+            }
+        };
+        btnGuardar.addActionListener(guardar);
+                
     }
 
     public void buscaUsuarios() throws IOException {
@@ -103,26 +114,53 @@ public class InterfaceBorrarUsuario extends JFrame {
         }
     }
 
-    public void removeUser(String run) {
+    public void removeUser(String nombre) {
         try {
             registro = new File("Registro.txt");
-            fr = new FileReader(registro);
-            lector = new BufferedReader(fr);
-
-            fw = new FileWriter(registro);
-            writer = new PrintWriter(fw);
-            String lee;
-            while ((lee = lector.readLine()) != null) {
-                if (!lee.contains(run)) {
-                    writer.println(lee);
-                    writer.flush();
-                }
+            tempFile = new File("Reserva.txt");
+            fr       = new FileReader("Registro.txt");
+            lector   = new BufferedReader(fr);
+            writer   = new FileWriter(tempFile,true);
+            fw       = new FileWriter(registro);                               
+            String cadena;
+            
+            while ((cadena=lector.readLine()) != null) {
+                System.out.println(cadena);
+               if(!cadena.contains(nombre)){
+                   writer.write(cadena);
+               }               
             }
-            lector.close();
             writer.close();
-        } catch (IOException ex) {
-            Logger.getLogger(InterfaceBorrarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+
+            //Renombra el archivo nuevo
+            if (!tempFile.renameTo(registro)) {
+                System.out.println("Archivo no renombrado");
+            }      
+            }catch (IOException ex) {
+            System.out.println(ex.getMessage());
+            }                               
+    }
+
+   /* public String eliminaLineasBlancas() throws FileNotFoundException, IOException {
+        registro = new File("Registro.txt");
+        fr = new FileReader(registro);
+        fw = new FileWriter(registro);
+        lector = new BufferedReader(fr);
+        writer = new PrintWriter(fw);
+        String lee;
+        String texto = "";
+        while ((lee = lector.readLine()) != null) {
+            if (!lee.isEmpty()) {
+                writer.println(texto);
+                writer.flush();
+            }
         }
 
-    }
+        writer.close();
+        lector.close();
+        System.out.println(texto);
+        return texto;
+
+    }*/
+    
 }
