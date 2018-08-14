@@ -12,6 +12,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,8 +33,9 @@ public class InterfaceBorrarUsuario extends JFrame {
     private FileReader fr;
     private BufferedReader lector;
     private DefaultTableModel modelo;
-    private File registro;
+    private File registro = new File("Registro.txt");
     private FileWriter fw;
+    public Files files;
     private FileWriter wr;
     private BufferedWriter writer;
     private File tempFile;
@@ -79,6 +81,7 @@ public class InterfaceBorrarUsuario extends JFrame {
                 modelo.removeRow(fila);
                 try {
                     removeUser(nombre);
+
                 } catch (IOException ex) {
                     System.out.println(ex.getMessage());
                 }
@@ -88,8 +91,8 @@ public class InterfaceBorrarUsuario extends JFrame {
         ActionListener guardar = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-              InterfaceMenuAdmin menu = new InterfaceMenuAdmin();
-              
+                InterfaceMenuAdmin menu = new InterfaceMenuAdmin();
+
             }
         };
         btnGuardar.addActionListener(guardar);
@@ -120,12 +123,12 @@ public class InterfaceBorrarUsuario extends JFrame {
     }
 
     public void removeUser(String nombre) throws IOException {
+
         String lee = null;
         String usuario = "";
-        CharSequence aux = "";
+        CharSequence aux = nombre;
         try {
-            registro = new File("Registro.txt");
-            tempFile = new File("Registro1.txt");
+            tempFile = new File(registro.getAbsolutePath() + ".tmp");
             fr = new FileReader(registro);
             lector = new BufferedReader(fr);
             fw = new FileWriter(tempFile);
@@ -135,28 +138,36 @@ public class InterfaceBorrarUsuario extends JFrame {
             System.out.println(ex.getMessage());
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
         }
 
-        while ((lee = lector.readLine()) != ""){
-            lee = lector.readLine();
-            aux = lee;
+        while ((lee = lector.readLine()) != null) {
             System.out.println(aux);
-
-            if (lee.contains(aux)) {
+            if (lee.contains(nombre)) {
                 continue;
             } else {
-                usuario += "\n" + lee;
-            }
-        }  
-        writer.write(usuario);
-        writer.close();
-        if (!registro.delete()) {
-            System.out.println("Registro eliminado");
-        }
-        if (!tempFile.renameTo(registro)) {
-            System.out.println("Nombre cambiado");
-        }
 
+                writer.write(lee);
+
+            }
+        }
+        writer.close();
+        fr.close();
+        fw.close();
+        lector.close();
+        
+        borrar();
+        cambiar();
+        dispose();
+    }
+
+    public void borrar() {
+        registro.delete();
+    }
+
+    public void cambiar() {
+        tempFile.renameTo(registro);
     }
 
     /* public String eliminaLineasBlancas() throws FileNotFoundException, IOException {
